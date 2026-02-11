@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>郑州大学声桥科技有限公司 - 知音APP</title>
+    <!-- 引入Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 引入Font Awesome图标库 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- 自定义Tailwind配置 -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#165DFF',
+                        secondary: '#36CFC9',
+                        dark: '#1D2129',
+                        light: '#F2F3F5'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .text-shadow {
+                text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+            .card-hover {
+                transition: all 0.3s ease;
+            }
+            .card-hover:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+            }
+            .audio-wave {
+                height: 40px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 2px;
+            }
+            .audio-wave span {
+                width: 4px;
+                height: 100%;
+                background: linear-gradient(to top, #165DFF, #36CFC9);
+                border-radius: 4px;
+                animation: wave 1.2s ease-in-out infinite alternate;
+            }
+            @keyframes wave {
+                0% { height: 10px; }
+                50% { height: 30px; }
+                100% { height: 10px; }
+            }
+            .audio-wave span:nth-child(2) { animation-delay: 0.1s; }
+            .audio-wave span:nth-child(3) { animation-delay: 0.2s; }
+            .audio-wave span:nth-child(4) { animation-delay: 0.3s; }
+            .audio-wave span:nth-child(5) { animation-delay: 0.4s; }
+            .audio-wave span:nth-child(6) { animation-delay: 0.5s; }
+            .audio-wave span:nth-child(7) { animation-delay: 0.6s; }
+        }
+    </style>
+</head>
+<body class="font-sans text-dark bg-light">
+    <!-- 导航栏 -->
+    <nav id="navbar" class="fixed w-full bg-white/90 backdrop-blur-sm shadow-sm z-50 transition-all duration-300">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-primary flex items-center">
+                <!-- 公司Logo -->
+                <img src="https://p3-flow-imagex-download-sign.byteimg.com/tos-cn-i-a9rns2rl98/00afd20ea4574eebb02f05b647182ca9.jpg~tplv-a9rns2rl98-24:720:720.image?lk3s=8e244e95&rcl=20260210120434461F09CDAC760C1FE222&rrcfp=8a172a1a&x-expires=1771301074&x-signature=V31bQ5Tqs6096JYO3yF2kRr6%2F0c%3D" 
+                     alt="郑州大学声桥科技有限公司" 
+                     class="w-10 h-10 mr-2 rounded-md">
+                <span class="text-lg md:text-xl">郑州大学声桥科技有限公司</span>
+            </a>
+            
+            <!-- 桌面导航 -->
+            <div class="hidden md:flex space-x-8">
+                <a href="#home" class="font-medium hover:text-primary transition-colors">首页</a>
+                <a href="#products" class="font-medium hover:text-primary transition-colors">产品介绍</a>
+                <a href="#model-test" class="font-medium hover:text-primary transition-colors">模型测试</a>
+                <a href="#company" class="font-medium hover:text-primary transition-colors">公司介绍</a>
+                <a href="#team" class="font-medium hover:text-primary transition-colors">核心团队</a>
+                <a href="#contact" class="font-medium hover:text-primary transition-colors">联系我们</a>
+            </div>
+            
+            <!-- 移动端菜单按钮 -->
+            <button id="menuBtn" class="md:hidden text-dark text-xl">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+        
+        <!-- 移动端导航菜单 -->
+        <div id="mobileMenu" class="md:hidden hidden bg-white border-t">
+            <div class="container mx-auto px-4 py-2 flex flex-col space-y-3">
+                <a href="#home" class="py-2 hover:text-primary transition-colors">首页</a>
+                <a href="#products" class="py-2 hover:text-primary transition-colors">产品介绍</a>
+                <a href="#model-test" class="py-2 hover:text-primary transition-colors">模型测试</a>
+                <a href="#company" class="py-2 hover:text-primary transition-colors">公司介绍</a>
+                <a href="#team" class="py-2 hover:text-primary transition-colors">核心团队</a>
+                <a href="#contact" class="py-2 hover:text-primary transition-colors">联系我们</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 首页横幅 -->
+    <section id="home" class="pt-24 pb-16 md:pt-32 md:pb-24 bg-gradient-to-r from-primary/90 to-secondary/90 text-white">
+        <div class="container mx-auto px-4 flex flex-col md:flex-row items-center">
+            <div class="md:w-1/2 mb-8 md:mb-0">
+                <h1 class="text-[clamp(2rem,5vw,3.5rem)] font-bold leading-tight text-shadow mb-4">
+                    知音APP <br>
+                    听见世界的美好
+                </h1>
+                <p class="text-lg md:text-xl mb-8 max-w-lg opacity-90">
+                    郑州大学声桥科技有限公司倾力打造的知音APP，融合<strong>高精度语音识别</strong>与<strong>智能环境音识别</strong>技术，
+                    基于YAMNet深度学习模型精准识别门铃、电话、警报、敲门声等数十种环境音，
+                    结合实时语音转文字功能，为听障人士提供全方位的听力辅助解决方案。
+                </p>
+                <div class="flex flex-wrap gap-4">
+                    <a href="#products" class="bg-white text-primary px-6 py-3 rounded-lg font-medium hover:bg-opacity-90 transition-all shadow-lg">
+                        了解产品
+                    </a>
+                    <a href="#model-test" class="bg-transparent border-2 border-white px-6 py-3 rounded-lg font-medium hover:bg-white/10 transition-all">
+                        测试模型
+                    </a>
+                    <!-- 新增APP下载按钮 -->
+                    <a href="#" class="bg-secondary text-white px-6 py-3 rounded-lg font-medium hover:bg-opacity-90 transition-all shadow-lg flex items-center">
+                        <i class="fa-solid fa-download mr-2"></i> 下载APP
+                    </a>
+                </div>
+            </div>
+            <div class="md:w-1/2 flex justify-center">
+                <!-- 替换为更贴合的APP展示图 -->
+                <img src="https://p3-flow-imagex-download-sign.byteimg.com/tos-cn-i-a9rns2rl98/00afd20ea4574eebb02f05b647182ca9.jpg~tplv-a9rns2rl98-24:720:720.image?lk3s=8e244e95&rcl=20260210120434461F09CDAC760C1FE222&rrcfp=8a172a1a&x-expires=1771301074&x-signature=V31bQ5Tqs6096JYO3yF2kRr6%2F0c%3D" 
+                     alt="知音APP - 语音+环境音识别" 
+                     class="rounded-xl shadow-2xl w-full max-w-md">
+            </div>
+        </div>
+    </section>
+
+    <!-- 产品介绍区域 - 扩充语音+环境音识别内容 -->
+    <section id="products" class="py-16 md:py-24 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-bold mb-4">产品介绍 - 知音APP</h2>
+                <p class="text-gray-600 max-w-3xl mx-auto">
+                    融合<strong class="text-primary">实时语音转文字</strong>与<strong class="text-primary">智能环境音识别</strong>双核心技术，
+                    基于YAMNet深度学习模型开发，可识别门铃、电话、警报、敲门声、婴儿哭声等60+种环境音，
+                    为听障人士提供精准、及时的声音感知解决方案
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- 核心功能1：实时语音转文字 -->
+                <div class="bg-light rounded-xl overflow-hidden shadow-md card-hover">
+                    <img src="https://p3-flow-imagex-download-sign.byteimg.com/tos-cn-i-a9rns2rl98/00afd20ea4574eebb02f05b647182ca9.jpg~tplv-a9rns2rl98-24:720:720.image?lk3s=8e244e95&rcl=20260210120434461F09CDAC760C1FE222&rrcfp=8a172a1a&x-expires=1771301074&x-signature=V31bQ5Tqs6096JYO3yF2kRr6%2F0c%3D" 
+                         alt="实时语音转文字" 
+                         class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">实时语音转文字</h3>
+                        <p class="text-gray-600 mb-4">
+                            基于先进的ASR语音识别技术，毫秒级完成语音到文字的转换，支持普通话、方言等多语种识别，
+                            准确率达98%以上，覆盖日常对话、会议、教学、公共广播等全场景，文字实时滚动显示，支持历史记录回放。
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm">毫秒级响应</span>
+                            <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm">98%+准确率</span>
+                            <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm">多语种</span>
+                            <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm">历史回放</span>
+                        </div>
+                        <!-- 新增下载按钮 -->
+                        <a href="#" class="text-primary font-medium hover:underline flex items-center">
+                            <i class="fa-solid fa-download mr-2"></i> 下载体验 <i class="fa-solid fa-arrow-right ml-2 text-sm"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- 核心功能2：智能环境音识别 -->
+                <div class="bg-light rounded-xl overflow-hidden shadow-md card-hover">
+                    <img src="https://p3-flow-imagex-download-sign.byteimg.com/tos-cn-i-a9rns2rl98/00afd20ea4574eebb02f05b647182ca9.jpg~tplv-a9rns2rl98-24:720:720.image?lk3s=8e244e95&rcl=20260210120434461F09CDAC760C1FE222&rrcfp=8a172a1a&x-expires=1771301074&x-signature=V31bQ5Tqs6096JYO3yF2kRr6%2F0c%3D" 
+                         alt="智能环境音识别" 
+                         class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">智能环境音识别</h3>
+                        <p class="text-gray-600 mb-4">
+                            基于Google YAMNet深度学习模型训练优化，精准识别60+种关键环境音（门铃、电话、警报、敲门声、婴儿哭声、火警、水流声等），
+                            识别后通过震动、闪光、文字提示、语音播报（可选）等多方式提醒，大幅提升听障人士生活安全性与便利性。
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm">YAMNet模型</span>
+                            <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm">60+环境音</span>
+                            <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm">多方式提醒</span>
+                            <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm">高准确率</span>
+                        </div>
+                        <a href="#model-test" class="text-primary font-medium hover:underline flex items-center">
+                            测试模型效果 <i class="fa-solid fa-arrow-right ml-2 text-sm"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- 核心功能3：个性化适配 -->
+                <div class="bg-light rounded-xl overflow-hidden shadow-md card-hover">
+                    <img src="https://p3-flow-imagex-download-sign.byteimg.com/tos-cn-i-a9rns2rl98/00afd20ea4574eebb02f05b647182ca9.jpg~tplv-a9rns2rl98-24:720:720.image?lk3s=8e244e95&rcl=20260210120434461F09CDAC760C1FE222&rrcfp=8a172a1a&x-expires=1771301074&x-signature=V31bQ5Tqs6096JYO3yF2kRr6%2F0c%3D" 
+                         alt="个性化听力适配" 
+                         class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">个性化听力适配</h3>
+                        <p class="text-gray-600 mb-4">
+                            支持自定义环境音识别灵敏度、提醒方式（震动强度、闪光频率）、文字显示样式等，
+                            基于用户听力检测数据生成专属适配方案，可针对高频/低频听力损失进行声音补偿，还原清晰声音细节。
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm">自定义配置</span>
+                            <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm">专属适配</span>
+                            <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm">声音补偿</span>
+                            <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm">易操作</span>
+                        </div>
+                        <!-- 新增下载按钮 -->
+                        <a href="#" class="text-primary font-medium hover:underline flex items-center">
+                            <i class="fa-solid fa-download mr-2"></i> 下载体验 <i class="fa-solid fa-arrow-right ml-2 text-sm"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 新增APP下载区域 -->
+            <div class="mt-16 bg-primary/5 rounded-2xl p-8 md:p-10 flex flex-col md:flex-row items-center justify-between">
+                <div class="md:w-2/3 mb-8 md:mb-0">
+                    <h3 class="text-2xl font-bold mb-4 text-dark">立即下载知音APP</h3>
+                    <p class="text-gray-600 mb-6 max-w-xl">
+                        支持Android/iOS双平台，安装包体积小、运行流畅，无广告、无后台推送，保护用户隐私，
+                        首次使用赠送7天高级功能体验，涵盖全部环境音识别与语音转文字功能。
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <a href="#" class="bg-primary text-white px-6 py-3 rounded-lg font-medium hover:bg-primary/90 transition-all flex items-center">
+                            <i class="fa-brands fa-android mr-2 text-xl"></i> 安卓下载
+                        </a>
+                        <a href="#" class="bg-dark text-white px-6 py-3 rounded-lg font-medium hover:bg-dark/90 transition-all flex items-center">
+                            <i class="fa-brands fa-apple mr-2 text-xl"></i> iOS下载
+                        </a>
+                    </div>
+                </div>
+                <div class="md:w-1/3 flex justify-center">
+                    <img src="https://picsum.photos/id/1015/200/200" alt="知音APP下载二维码" class="w-48 h-48 rounded-lg shadow-md">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 新增模型测试模块 -->
+    <section id="model-test" class="py-16 md:py-24 bg-light">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-bold mb-4">环境音识别模型测试</h2>
+                <p class="text-gray-600 max-w-3xl mx-auto">
+                    上传MP3/WAV/FLAC等格式音频文件（≤10MB），测试YAMNet环境音识别模型的效果，
+                    系统将输出识别到的环境音种类及置信度，仅用于功能演示，不存储您的音频文件
+                </p>
+            </div>
+            
+            <div class="max-w-3xl mx-auto bg-white rounded-2xl shadow-md p-8 md:p-10">
+                <!-- 音频上传区域 -->
+                <div class="border-2 border-dashed border-gray-300 rounded-xl p-8 text-center mb-8 hover:border-primary transition-colors" id="uploadArea">
+                    <input type="file" id="audioFile" accept=".mp3,.wav,.flac,.ogg" class="hidden">
+                    <label for="audioFile" class="cursor-pointer">
+                        <i class="fa-solid fa-cloud-upload text-4xl text-primary mb-4"></i>
+                        <h3 class="text-lg font-medium mb-2">点击上传音频文件</h3>
+                        <p class="text-gray-500 text-sm">支持MP3/WAV/FLAC/OGG格式，文件大小≤10MB</p>
+                    </label>
+                </div>
+                
+                <!-- 音频预览区域 (默认隐藏) -->
+                <div id="audioPreview" class="hidden mb-8">
+                    <div class="flex flex-col md:flex-row items-center gap-4 mb-4">
+                        <audio id="audioPlayer" controls class="w-full md:w-4/5"></audio>
+                        <button id="testBtn" class="bg-primary text-white px-6 py-2 rounded-lg font-medium hover:bg-primary/90 transition-all w-full md:w-1/5">
+                            开始识别
+                        </button>
+                    </div>
+                    <div class="audio-wave hidden" id="loadingWave">
+                        <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+                    </div>
+                </div>
+                
+                <!-- 识别结果区域 (默认隐藏) -->
+                <div id="resultArea" class="hidden">
+                    <h3 class="text-xl font-bold mb-4 text-primary">识别结果</h3>
+                    <div class="bg-light rounded-lg p-6">
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="font-medium">环境音类型：</span>
+                            <span id="soundType" class="text-primary font-bold">——</span>
+                        </div>
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="font-medium">识别置信度：</span>
+                            <span id="confidence" class="text-primary font-bold">——</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="font-medium">识别耗时：</span>
+                            <span id="costTime" class="text-primary font-bold">——</span>
+                        </div>
+                    </div>
+                    <button id="resetBtn" class="mt-6 w-full border border-gray-300 text-dark px-6 py-2 rounded-lg font-medium hover:bg-gray-100 transition-all">
+                        重新上传测试
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 新增公司介绍模块 -->
+    <section id="company" class="py-16 md:py-24 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-bold mb-4">公司介绍</h2>
+                <p class="text-gray-600 max-w-3xl mx-auto">
+                    郑州大学声桥科技有限公司依托郑州大学人工智能研究院核心技术，专注听力辅助领域研发与应用
+                </p>
+            </div>
+            
+            <div class="max-w-4xl mx-auto">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-16">
+                    <div>
+                        <h3 class="text-2xl font-bold mb-6 text-primary">关于声桥科技</h3>
+                        <p class="text-gray-700 mb-4 leading-relaxed">
+                            郑州大学声桥科技有限公司成立于2026年，是郑州大学孵化的高新技术企业，核心团队由郑州大学人工智能专业学生组成，
+                            专注于听障人士辅助技术的研发与转化，拥有多项语音识别、环境音处理相关专利及软件著作权。
+                        </p>
+                        <p class="text-gray-700 mb-4 leading-relaxed">
+                            公司核心产品「知音APP」融合YAMNet环境音识别、ASR语音转文字等前沿技术，旨在解决听障人士日常交流、环境感知等核心痛点。
+                            
+                        </p>
+                        <p class="text-gray-700 leading-relaxed">
+                            公司愿景：让每一位听障人士都能平等感知世界的声音，享受科技带来的便利与温暖。
+                        </p>
+                    </div>
+                    <div>
+                        <img src="https://p3-flow-imagex-download-sign.byteimg.com/tos-cn-i-a9rns2rl98/00afd20ea4574eebb02f05b647182ca9.jpg~tplv-a9rns2rl98-24:720:720.image?lk3s=8e244e95&rcl=20260210120434461F09CDAC760C1FE222&rrcfp=8a172a1a&x-expires=1771301074&x-signature=V31bQ5Tqs6096JYO3yF2kRr6%2F0c%3D" 
+                             alt="郑州大学声桥科技有限公司" 
+                             class="w-full h-auto rounded-xl shadow-lg">
+                    </div>
+                </div>
+                
+                <!-- 公司优势 -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-light rounded-xl p-6 text-center card-hover">
+                        <i class="fa-solid fa-microchip text-4xl text-primary mb-4"></i>
+                        <h4 class="text-xl font-bold mb-2">技术优势</h4>
+                        <p class="text-gray-600">依托郑州大学AI实验室，拥有自主研发的环境音识别优化算法，准确率行业领先</p>
+                    </div>
+                    <div class="bg-light rounded-xl p-6 text-center card-hover">
+                        <i class="fa-solid fa-users text-4xl text-primary mb-4"></i>
+                        <h4 class="text-xl font-bold mb-2">团队优势</h4>
+                        <p class="text-gray-600">跨学科核心团队，涵盖AI算法、产品设计等多领域专业人才</p>
+                    </div>
+                    <div class="bg-light rounded-xl p-6 text-center card-hover">
+                        <i class="fa-solid fa-hand-holding-heart text-4xl text-primary mb-4"></i>
+                        <h4 class="text-xl font-bold mb-2">服务优势</h4>
+                        <p class="text-gray-600">深度贴合听障用户需求，提供定制化适配服务，持续迭代优化产品功能</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 团队介绍区域 - 完善成员信息 -->
+    <section id="team" class="py-16 md:py-24 bg-light">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-bold mb-4">核心团队</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">
+                    郑州大学声桥科技有限公司核心团队由跨学科专家组成，深耕听力辅助、人工智能领域多年，兼具技术研发与产品落地能力
+                </p>
+            </div>
+            
+            <!-- 10人布局：移动端1列，平板2列，桌面5列（2行） -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8">
+                <!-- 团队成员1 - CEO -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-md card-hover text-center">
+                    <img src="https://picsum.photos/id/1005/300/300" alt="唐文琦 - CEO" class="w-full h-64 object-cover object-center">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-1">唐文琦</h3>
+                        <p class="text-primary mb-3">首席执行官 (CEO)</p>
+                        <p class="text-gray-600 text-sm mb-4">
+                            郑州大学人工智能专业硕士，主导知音APP整体战略规划，统筹模型训练团队核心工作，
+                            拥有5年人工智能产品商业化落地经验。
+                        </p>
+                        <div class="flex justify-center space-x-3">
+                            <a href="#" class="text-gray-500 hover:text-primary transition-colors"><i class="fa-brands fa-linkedin"></i></a>
+                            <a href="#" class="text-gray-500 hover:text-primary transition-colors"><i class="fa-brands fa-weixin"></i></a>
+                            <a href="#" class="text-gray-500 hover:text-primary transition-colors"><i class="fa-solid fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 团队成员2 - CTO -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-md card-hover text-center">
+                    <img src="https://picsum.photos/id/1000/300/300" alt="李子恒 - CTO" class="w-full h-64 object-cover object-center">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-1">李子恒</h3>
+                        <p class="text-primary mb-3">首席技术官 (CTO)</p>
+                        <p class="text-gray-600 text-sm mb-4">
+                            郑州大学计算机专业博士，负责YAMNet环境音识别、ASR语音转文字核心算法研发与落地，
+                            发表相关学术论文10余篇，拥有3项语音识别专利。
+                        </p>
+                        <div class="flex justify-center space-x-3">
+                            <a href="#" class="text-gray-500 hover:text-primary transition-colors"><i class="fa-brands fa-linkedin"></i></a>
+                            <a href="#" class="text-gray-500 hover:text-primary transition-colors"><i class="fa-brands fa-github"></i></a>
+                            <a href="#" class="text-gray-500 hover:text-primary transition-colors"><i class="fa-solid fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 团队成员3 - COO -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-md card-hover text-center">
+                    <img src="https://picsum.photos/id/1011/300/300" alt="袁佳晴 - COO" class="w-full h-64 object-cover object-center">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-1">袁佳晴</h3>
+                        <p class="text-primary mb-3">首席运营官 (COO)</p>
+                        <p class="text-gray-600 text-sm mb-4">
+                            负责项目进度报告撰写，统筹市场推广和用户服务体系建设，
+                            曾任职于知名医疗科技企业，拥有丰富的康复类产品运营经验。
+                        </p>
+                        <div class="flex justify-center space-x-3">
+                            <a href="#" class="text-gray-500 hover:text-primary transition-colors"><i class="fa-brands fa-linkedin"></i></a>
+                            <a href="#" class="text-gray-500 hover:text-primary transition-colors"><i class="fa-brands fa-weibo"></i></a>
+                            <a href="#" class="text-gray-500 hover:text-primary transition-colors"><i class="fa-solid fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 团队成员4 - 产品总监 -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-md card-hover text-center">
+                    <img src="https://picsum.photos/id/1012/300/300" alt="孙杨 - 产品总监" class="w-full h-64 object-cover object-center">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-1">孙杨</h3>
+                        <p class="text-primary mb-3">产品总监</p>
+                        <p class="text-gray-600 text-sm mb-4">
+                            负责进度报告更新，结合听障用户需求主导APP功能迭代设计，
+                            专注无障碍产品设计8年，主导多款康复辅助类APP产品设计。
+                        </p>
+                        <div class="flex justify-center space-x-3">
+                            <a href="#" class="text-gray-500 hover:text-primary transition-colors"><i class="fa-brands fa-linkedin"></i></a>
+                            <a href="#" class="text-gray-500 hover:text-primary transition-colors"><i class="fa-brands fa-dribbble"></i></a>
+                            <a href="#" class="text-gray-500 hover:text-primary transition-colors"><i class="fa-solid fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 团队成员5 - 算法工程师 -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-md card-hover text-center">
+                    <img src="https://picsum.photos/id/1025/300/300" alt="章俪潆 - 算法工程师" class="w-full h-64 object-cover object-center">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-1">章俪潆</h3>
+                        <p class="text-primary mb-3">资深算法工程师</p>
+                        <p class="text-gray-600 text-sm mb-4">
+                            郑州大学人工智能硕士，专注YAMNet环境音识别算法优化，
+                            精准捕捉背景紧急环境音，算法识别准确率提升15%。
+                        </p>
+                        <div class="flex justify-center space-x-3">
+                            <a href="#" class="text-gray-500 hover:text-primary transition-colors"><i class="fa-brands fa-linkedin"></i></a>
+                            <a href="#" class="text-gray-500 hover:text-primary transition-colors"><i class="fa-brands fa-github"></i></a>
+                            <a href="#" class="text-gray-500 hover:text-primary transition-colors"><i class="fa-solid fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 团队成员6 - 前端开发负责人 -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-md card-hover text-center">
+                    <img src="https://picsum.photos/id/1074/300/300" alt="侯琳菲 - 前端开发负责人" class="w-full h-64 object-cover object-center">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-1">侯琳菲</h3>
+                        <p class="text-primary mb-3">前端开发负责人</p>
+                        <p class="text-gray-600 text-sm mb-4">
+                            使用uni-app开发知音APP前端，力争年前完成最初版本落地，
+                            拥有6年跨端开发经验，精通小程序/APP前端开发。
+                        </p>
+                        <div class="flex justify-center space-x-3">
+                            <a href="#" class="text-gray-500 hover:text-primary transition-colors"><i class="fa-brands fa-linkedin"></i></a>
+                            <a href="#" class="text-gray-500 hover:text-primary transition-colors"><i class="fa-brands fa-github"></i></a>
+                            <a href="#" class="text-gray-500 hover:text-primary transition-colors"><i class="fa-solid fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 团队成员7 - 后端开发负责人 -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-md card-hover text-center">
+                    <img src="https://picsum.photos/id/1066/300/300" alt="郭海超 - 后端开发负责人" class="w-full h-64 object-cover object-center">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-1">郭海超</h3>
+                        <p class="text-primary mb-3">后端开发负责人</p>
+                        <p class="text-gray-600 text-sm mb-4">
+                            负责知音APP后端开发，对接ASR API并异步聚合算法结果回传，
+                            精通分布式架构设计，保障系统高可用、高并发。
+                        </p>
+                        <div class="flex justify-center space-x-3">
+                            <a href="#" class="text-gray-500 hover:text-primary transition-colors"><i class="fa-brands fa-linkedin"></i></a>
+                            <a href="#" class="text-gray-500 hover:text-primary transition-colors"><i class="fa-brands fa-github"></i></a>
+                            <a href="#" class="text-gray-500 hover:text-primary transition-colors"><i class="fa-solid fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 团队成员8 - UI/UX设计师 -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-md card-hover text-center">
+                    <img src="https://picsum.photos/id/1062/300/300" alt="马静文 - UI/UX设计师" class="w-full h-64 object-cover object-center">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-1">马静文</h3>
+                        <p class="text-primary mb-3">UI/UX设计师</p>
+                        <p class="text-gray-600 text-sm mb-4">
+                            负责产品介绍网页设计，打造简洁易用的无障碍界面体验，
+                            擅长为特殊人群设计符合使用习惯的产品界面。
+                        </p>
+                        <div class="flex justify-center space-x-3">
+                            <a href="#" class="text-gray-500 hover:text-primary transition-colors"><i class="fa-brands fa-linkedin"></i></a>
+                            <a href="#" class="text-gray-500 hover:text-primary transition-colors"><i class="fa-brands fa-dribbble"></i></a>
+                            <a href="#" class="text-gray-500 hover:text-primary transition-colors"><i class="fa-solid fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 团队成员9 - 设计负责人 -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-md card-hover text-center">
+                    <img src="https://picsum.photos/id/1083/300/300" alt="卢美同 - 设计负责人" class="w-full h-64 object-cover object-center">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-1">卢美同</h3>
+                        <p class="text-primary mb-3">设计负责人</p>
+                        <p class="text-gray-600 text-sm mb-4">
+                            负责APP样图、公司logo、技术路线图等视觉设计工作，
+                            曾获省级工业设计大赛金奖，拥有丰富的品牌视觉设计经验。
+                        </p>
+                        <div class="flex justify-center space-x-3">
+                            <a href="#" class="text-gray-500 hover:text-primary transition-colors"><i class="fa-brands fa-linkedin"></i></a>
+                            <a href="#" class="text-gray-500 hover:text-primary transition-colors"><i class="fa-brands fa-github"></i></a>
+                            <a href="#" class="text-gray-500 hover:text-primary transition-colors"><i class="fa-solid fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 团队成员10 - 网页设计负责人 -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-md card-hover text-center">
+                    <img src="https://picsum.photos/id/1084/300/300" alt="杨昊 - 网页设计负责人" class="w-full h-64 object-cover object-center">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-1">杨昊</h3>
+                        <p class="text-primary mb-3">网页设计负责人</p>
+                        <p class="text-gray-600 text-sm mb-4">
+                            负责产品介绍网页的设计与落地，衔接品牌展示与用户认知，
+                            精通响应式网页设计，保障多终端良好的浏览体验。
+                        </p>
+                        <div class="flex justify-center space-x-3">
+                            <a href="#" class="text-gray-500 hover:text-primary transition-colors"><i class="fa-brands fa-linkedin"></i></a>
+                            <a href="#" class="text-gray-500 hover:text-primary transition-colors"><i class="fa-brands fa-weixin"></i></a>
+                            <a href="#" class="text-gray-500 hover:text-primary transition-colors"><i class="fa-solid fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 联系我们 -->
+    <section id="contact" class="py-16 md:py-24 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto bg-light rounded-2xl p-8 md:p-12 shadow-md">
+                <div class="text-center mb-8">
+                    <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-bold mb-4">联系我们</h2>
+                    <p class="text-gray-600">如有任何问题或合作意向，欢迎随时联系郑州大学声桥科技有限公司</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                        <div class="flex items-start mb-6">
+                            <div class="bg-primary/10 rounded-full p-3 mr-4">
+                                <i class="fa-solid fa-map-marker-alt text-primary text-xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-lg mb-1">公司地址</h3>
+                                <p class="text-gray-600">郑州市高新区科学大道100号郑州大学科技园18层</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start mb-6">
+                            <div class="bg-primary/10 rounded-full p-3 mr-4">
+                                <i class="fa-solid fa-phone text-primary text-xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-lg mb-1">联系电话</h3>
+                                <p class="text-gray-600">400-888-9999</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="bg-primary/10 rounded-full p-3 mr-4">
+                                <i class="fa-solid fa-envelope text-primary text-xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-lg mb-1">电子邮箱</h3>
+                                <p class="text-gray-600">contact@sqtech-zzu.com</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <form class="space-y-4">
+                            <div>
+                                <label for="name" class="block text-sm font-medium text-gray-700 mb-1">姓名</label>
+                                <input type="text" id="name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all" placeholder="请输入您的姓名">
+                            </div>
+                            
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-gray-700 mb-1">邮箱</label>
+                                <input type="email" id="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all" placeholder="请输入您的邮箱">
+                            </div>
+                            
+                            <div>
+                                <label for="message" class="block text-sm font-medium text-gray-700 mb-1">留言</label>
+                                <textarea id="message" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all" placeholder="请输入您的留言"></textarea>
+                            </div>
+                            
+                            <button type="submit" class="w-full bg-primary text-white py-3 rounded-lg font-medium hover:bg-primary/90 transition-all">
+                                发送留言
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="bg-dark text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">郑州大学声桥科技</h3>
+                    <p class="text-gray-400 mb-4">知音APP - 听见世界的美好</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors"><i class="fa-brands fa-weixin text-xl"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors"><i class="fa-brands fa-weibo text-xl"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors"><i class="fa-brands fa-linkedin text-xl"></i></a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-4">产品中心</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition-colors">知音APP - 语音转文字</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">知音APP - 环境音识别</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">知音APP - 个性化适配</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">模型测试工具</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-4">关于我们</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#company" class="hover:text-white transition-colors">公司简介</a></li>
+                        <li><a href="#team" class="hover:text-white transition-colors">核心团队</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">发展历程</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">招贤纳士</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-4">联系方式</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li class="flex items-center"><i class="fa-solid fa-phone mr-2"></i> 400-888-9999</li>
+                        <li class="flex items-center"><i class="fa-solid fa-envelope mr-2"></i> contact@sqtech-zzu.com</li>
+                        <li class="flex items-center"><i class="fa-solid fa-map-marker-alt mr-2"></i> 郑州市高新区科学大道100号</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-8 text-center text-gray-500 text-sm">
+                <p>© 2025 郑州大学声桥科技有限公司 版权所有 | 豫ICP备12345678号</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // 移动端菜单切换
+        const menuBtn = document.getElementById('menuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            // 切换菜单图标
+            const icon = menuBtn.querySelector('i');
+            if (icon.classList.contains('fa-bars')) {
+                icon.classList.replace('fa-bars', 'fa-times');
+            } else {
+                icon.classList.replace('fa-times', 'fa-bars');
+            }
+        });
+        
+        // 导航栏滚动效果
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('py-2', 'shadow-md');
+                navbar.classList.remove('py-3');
+            } else {
+                navbar.classList.add('py-3');
+                navbar.classList.remove('py-2', 'shadow-md');
+            }
+        });
+        
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                // 关闭移动端菜单
+                mobileMenu.classList.add('hidden');
+                const icon = menuBtn.querySelector('i');
+                icon.classList.replace('fa-times', 'fa-bars');
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // 表单提交处理
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('留言发送成功！我们会尽快与您联系。');
+            this.reset();
+        });
+
+        // 模型测试功能逻辑
+        const audioFile = document.getElementById('audioFile');
+        const audioPreview = document.getElementById('audioPreview');
+        const audioPlayer = document.getElementById('audioPlayer');
+        const testBtn = document.getElementById('testBtn');
+        const loadingWave = document.getElementById('loadingWave');
+        const resultArea = document.getElementById('resultArea');
+        const soundType = document.getElementById('soundType');
+        const confidence = document.getElementById('confidence');
+        const costTime = document.getElementById('costTime');
+        const resetBtn = document.getElementById('resetBtn');
+        const uploadArea = document.getElementById('uploadArea');
+
+        // 监听文件上传
+        audioFile.addEventListener('change', function(e) {
+            const file = this.files[0];
+            if (file) {
+                // 验证文件类型
+                const validTypes = ['audio/mp3', 'audio/wav', 'audio/flac', 'audio/ogg'];
+                if (!validTypes.includes(file.type) && !file.name.endsWith('.mp3') && !file.name.endsWith('.wav') && !file.name.endsWith('.flac') && !file.name.endsWith('.ogg')) {
+                    alert('请上传MP3/WAV/FLAC/OGG格式的音频文件！');
+                    return;
+                }
+                // 验证文件大小
+                if (file.size > 10 * 1024 * 1024) {
+                    alert('文件大小不能超过10MB！');
+                    return;
+                }
+                // 显示音频预览
+                audioPlayer.src = URL.createObjectURL(file);
+                audioPreview.classList.remove('hidden');
+                uploadArea.classList.add('opacity-50');
+            }
+        });
+
+        // 测试按钮点击事件
+        testBtn.addEventListener('click', function() {
+            // 显示加载动画
+            loadingWave.classList.remove('hidden');
+            testBtn.disabled = true;
+            testBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-2"></i> 识别中...';
+            
+            // 模拟识别过程（实际项目中替换为真实接口调用）
+            setTimeout(() => {
+                // 随机生成测试结果（模拟不同环境音）
+                const soundTypes = ['门铃', '电话铃声', '敲门声', '婴儿哭声', '火警警报', '水流声', '汽车鸣笛', '雷声'];
+                const randomType = soundTypes[Math.floor(Math.random() * soundTypes.length)];
+                const randomConfidence = (90 + Math.random() * 10).toFixed(2);
+                const randomTime = (0.1 + Math.random() * 0.9).toFixed(2);
+                
+                // 填充结果
+                soundType.textContent = randomType;
+                confidence.textContent = `${randomConfidence}%`;
+                costTime.textContent = `${randomTime} 秒`;
+                
+                // 隐藏加载动画，显示结果
+                loadingWave.classList.add('hidden');
+                resultArea.classList.remove('hidden');
+                testBtn.disabled = false;
+                testBtn.innerHTML = '开始识别';
+            }, 2000);
+        });
+
+        // 重置按钮点击事件
+        resetBtn.addEventListener('click', function() {
+            audioFile.value = '';
+            audioPlayer.src = '';
+            audioPreview.classList.add('hidden');
+            resultArea.classList.add('hidden');
+            uploadArea.classList.remove('opacity-50');
+            soundType.textContent = '——';
+            confidence.textContent = '——';
+            costTime.textContent = '——';
+        });
+    </script>
+</body>
+</html>
